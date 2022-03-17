@@ -34,7 +34,7 @@ enum RecursiveInner<T> {
     Unowned(Weak<T>),
 }
 
-type OnceParser<'a, I, O, E> = OnceCell<Box<dyn DynParser<I, O, Error = E> + 'a>>;
+type OnceParser<'a, I, O, E> = OnceCell<Box<dyn Parser<I, O, Error = E> + 'a>>;
 
 /// A parser that can be defined in terms of itself by separating its [declaration](Recursive::declare) from its
 /// [definition](Recursive::define).

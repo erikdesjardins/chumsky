@@ -60,7 +60,7 @@ pub trait Debugger: Sized {
     #[doc(hidden)]
     fn invoke_unsized<I: Clone, O, E: Error<I>>(
         &mut self,
-        parser: &dyn DynParser<I, O, Error = E>,
+        parser: &dyn Parser<I, O, Error = E>,
         stream: &mut StreamOf<I, E>,
     ) -> PResult<I, O, E>;
 }
@@ -131,7 +131,7 @@ impl Debugger for Verbose {
 
     fn invoke_unsized<I: Clone, O, E: Error<I>>(
         &mut self,
-        parser: &dyn DynParser<I, O, Error = E>,
+        parser: &dyn Parser<I, O, Error = E>,
         stream: &mut StreamOf<I, E>,
     ) -> PResult<I, O, E> {
         parser.parse_inner_verbose(self, stream)
@@ -172,7 +172,7 @@ impl Debugger for Silent {
 
     fn invoke_unsized<I: Clone, O, E: Error<I>>(
         &mut self,
-        parser: &dyn DynParser<I, O, Error = E>,
+        parser: &dyn Parser<I, O, Error = E>,
         stream: &mut StreamOf<I, E>,
     ) -> PResult<I, O, E> {
         parser.parse_inner_silent(self, stream)
